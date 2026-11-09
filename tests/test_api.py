@@ -58,3 +58,16 @@ def test_scores_not_null():
     assert data["advanced_score"] is not None
     assert data["missing_skills"] is not None
     assert data["bias"] is not None
+
+def test_bias_ignores_he_inside_the():
+    with open("tests/sample_cv.pdf", "rb") as f:
+        response = client.post(
+            "/analyze",
+            files={"cv": ("sample_cv.pdf", f, "application/pdf")},
+            data={"job_description": "the other engineer will help the team"}
+        )
+
+    bias = response.json()["bias"]
+    assert bias["male_bias"] == 0
+    assert bias["female_bias"] == 0
+    assert bias["dominant"] == "neutral"
