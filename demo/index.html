@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Resume Matcher</title>
+<meta name="description" content="Compare a CV with a job description in your browser: SBERT semantic similarity, TF-IDF keyword overlap, skill gaps and gendered-word flags. Nothing is uploaded.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f6f7f9;
+  --card: #ffffff;
+  --ink: #172033;
+  --muted: #5b6577;
+  --line: #dfe3ea;
+  --blue: #2f5bea;
+  --blue-soft: #e6ecfd;
+  --mark: #ffe066;
+  --mark-ink: #3d3200;
+  --coral: #d93f45;
+  --coral-soft: #fdeceb;
+  --ok: #16794c;
+  --ok-soft: #e4f4ec;
+  --shadow: 0 1px 2px rgba(23, 32, 51, .06), 0 8px 24px rgba(23, 32, 51, .05);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e131b;
+    --card: #151c27;
+    --ink: #e6eaf2;
+    --muted: #96a0b3;
+    --line: #273142;
+    --blue: #7d9bff;
+    --blue-soft: #1c2847;
+    --mark: #6b5a12;
+    --mark-ink: #fff4c2;
+    --coral: #ff7b7f;
+    --coral-soft: #3a1c20;
+    --ok: #5fd39a;
+    --ok-soft: #133024;
+    --shadow: none;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e131b;
+  --card: #151c27;
+  --ink: #e6eaf2;
+  --muted: #96a0b3;
+  --line: #273142;
+  --blue: #7d9bff;
+  --blue-soft: #1c2847;
+  --mark: #6b5a12;
+  --mark-ink: #fff4c2;
+  --coral: #ff7b7f;
+  --coral-soft: #3a1c20;
+  --ok: #5fd39a;
+  --ok-soft: #133024;
+  --shadow: none;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 16px/1.55 "Instrument Sans", system-ui, sans-serif;
+}
+a { color: var(--blue); }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+header.top { padding: 40px 0 8px; }
+.brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand small { font: 500 13px/1 "IBM Plex Mono", monospace; color: var(--muted); letter-spacing: .02em; }
+.brand nav { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 8px; height: 34px; padding: 0 12px; font: inherit; font-size: 14px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+}
+.icon-btn:hover { border-color: var(--muted); }
+h1 {
+  font: 700 clamp(34px, 5.4vw, 56px)/1.04 "Bricolage Grotesque", sans-serif;
+  letter-spacing: -.025em; margin: 28px 0 12px; max-width: 16ch;
+}
+h1 mark { background: linear-gradient(transparent 12%, var(--mark) 12%, var(--mark) 88%, transparent 88%); color: inherit; padding: 0 .08em; }
+.lede { color: var(--muted); max-width: 62ch; margin: 0; font-size: 17px; }
+.lede b { color: var(--ink); font-weight: 600; }
+
+.inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.pane {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0;
+}
+.pane-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 14px 0; }
+.pane-head label { font-weight: 600; font-size: 14px; }
+.file-btn { font-size: 13px; height: 30px; }
+.file-btn input { display: none; }
+textarea {
+  border: 0; background: transparent; color: var(--ink); resize: vertical;
+  font: 400 14.5px/1.6 "Instrument Sans", system-ui, sans-serif;
+  padding: 10px 14px 14px; min-height: 230px; width: 100%; border-radius: 0 0 14px 14px;
+}
+textarea:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--blue); }
+.pane-foot { border-top: 1px solid var(--line); padding: 8px 14px; font: 400 12px/1.4 "IBM Plex Mono", monospace; color: var(--muted); }
+
+.actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 18px 0 8px; }
+.run {
+  background: var(--blue); color: #fff; border: 0; border-radius: 10px; height: 46px; padding: 0 22px;
+  font: 600 16px/1 "Instrument Sans", sans-serif; cursor: pointer;
+}
+:root[data-theme="dark"] .run { color: #0e131b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .run { color: #0e131b; } }
+.run:disabled { opacity: .55; cursor: progress; }
+.status { font: 400 13px/1.4 "IBM Plex Mono", monospace; color: var(--muted); min-height: 1.4em; }
+.status.err { color: var(--coral); }
+.progress { width: 160px; height: 4px; background: var(--line); border-radius: 4px; overflow: hidden; display: none; }
+.progress i { display: block; height: 100%; width: 0; background: var(--blue); transition: width .2s; }
+
+.results { margin: 28px 0 0; display: none; }
+.results.show { display: block; }
+.verdict {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+  padding: 22px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: center;
+}
+.big { font: 700 64px/1 "Bricolage Grotesque", sans-serif; letter-spacing: -.03em; }
+.big span { font-size: 28px; color: var(--muted); }
+.big-label { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.explain { font-weight: 600; margin: 10px 0 0; }
+.bars { display: grid; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: 210px 1fr 56px; gap: 12px; align-items: center; font-size: 14px; }
+.bar-row small { display: block; color: var(--muted); font-size: 12px; }
+.bar { position: relative; height: 10px; background: var(--blue-soft); border-radius: 6px; }
+.bar i { position: absolute; inset: 0 auto 0 0; background: var(--blue); border-radius: 6px; width: 0; transition: width .6s cubic-bezier(.2,.7,.2,1); }
+.bar .tick { position: absolute; top: -4px; bottom: -4px; left: 50%; width: 1px; background: var(--muted); opacity: .6; }
+.num { font: 500 14px/1 "IBM Plex Mono", monospace; text-align: right; }
+
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 18px; min-width: 0; }
+.card h2 { font: 600 15px/1.3 "Instrument Sans", sans-serif; margin: 0 0 4px; }
+.card p.sub { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 13px/1 "IBM Plex Mono", monospace; padding: 7px 9px; border-radius: 7px; }
+.chip.ok { background: var(--ok-soft); color: var(--ok); }
+.chip.miss { background: var(--coral-soft); color: var(--coral); }
+.chip.term { background: var(--mark); color: var(--mark-ink); }
+.empty { color: var(--muted); font-size: 14px; }
+.flag-word { font-family: "IBM Plex Mono", monospace; color: var(--coral); font-weight: 500; }
+
+.highlight { margin-top: 16px; }
+.hl-text { font-size: 14.5px; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 260px; overflow: auto; }
+.hl-text mark { background: var(--mark); color: var(--mark-ink); border-radius: 3px; padding: 0 2px; }
+.hl-text mark.bias { background: var(--coral-soft); color: var(--coral); text-decoration: underline wavy; text-underline-offset: 3px; }
+.hl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hl-grid h3 { font: 600 13px/1 "Instrument Sans", sans-serif; color: var(--muted); margin: 0 0 8px; text-transform: uppercase; letter-spacing: .06em; }
+
+details.how { margin: 36px 0 0; border-top: 1px solid var(--line); padding-top: 18px; }
+details.how summary { cursor: pointer; font-weight: 600; }
+details.how ul { color: var(--muted); padding-left: 20px; max-width: 75ch; }
+footer { color: var(--muted); font-size: 13px; padding: 28px 0 40px; }
+
+@media (max-width: 860px) {
+  .inputs, .grid3, .hl-grid { grid-template-columns: 1fr; }
+  .verdict { grid-template-columns: 1fr; gap: 18px; }
+  .bar-row { grid-template-columns: 1fr 52px; }
+  .bar-row .bar { grid-column: 1 / -1; grid-row: 2; }
+  textarea { min-height: 170px; }
+  header.top { padding-top: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <small>ai-resume-matcher · in-browser demo</small>
+      <nav>
+        <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+        <a class="icon-btn" href="https://github.com/Nardy11/ai-resume-matcher">GitHub</a>
+      </nav>
+    </div>
+    <h1>How well does this CV <mark>match</mark> the job?</h1>
+    <p class="lede">Paste a CV and a job description. The same pipeline as the Python service runs <b>in your browser</b>: SBERT semantic similarity, TF-IDF keyword overlap, skill gaps and gendered-word flags. Your text is never uploaded.</p>
+  </header>
+
+  <main>
+    <section class="inputs" aria-label="Inputs">
+      <div class="pane">
+        <div class="pane-head">
+          <label for="cv">CV</label>
+          <label class="icon-btn file-btn">Upload PDF<input id="pdf" type="file" accept="application/pdf"></label>
+        </div>
+        <textarea id="cv" spellcheck="false"></textarea>
+        <div class="pane-foot" id="cv-count">&nbsp;</div>
+      </div>
+      <div class="pane">
+        <div class="pane-head">
+          <label for="jd">Job description</label>
+          <button class="icon-btn file-btn" id="clear" type="button">Clear both</button>
+        </div>
+        <textarea id="jd" spellcheck="false"></textarea>
+        <div class="pane-foot" id="jd-count">&nbsp;</div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button class="run" id="run" type="button">Compare</button>
+      <div class="progress" id="progress"><i></i></div>
+      <div class="status" id="status" role="status" aria-live="polite">The model (all-MiniLM-L6-v2, about 90 MB) downloads on first use and is cached after that.</div>
+    </div>
+
+    <section class="results" id="results" aria-label="Results">
+      <div class="verdict">
+        <div>
+          <div class="big" id="overall">–</div>
+          <div class="big-label">Overall score (0.5 semantic + 0.2 keyword + 0.3 skills)</div>
+          <p class="explain" id="explanation"></p>
+        </div>
+        <div class="bars">
+          <div class="bar-row"><div>Semantic similarity<small>SBERT cosine</small></div><div class="bar"><i id="b-sbert"></i><span class="tick" title="0.5"></span></div><div class="num" id="n-sbert"></div></div>
+          <div class="bar-row"><div>Keyword overlap<small>TF-IDF cosine</small></div><div class="bar"><i id="b-tfidf"></i><span class="tick" title="0.5"></span></div><div class="num" id="n-tfidf"></div></div>
+          <div class="bar-row"><div>Skills covered<small>matched / required</small></div><div class="bar"><i id="b-skill"></i><span class="tick" title="0.5"></span></div><div class="num" id="n-skill"></div></div>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <h2>Matched skills</h2>
+          <p class="sub">Asked for in the job and found in the CV</p>
+          <div class="chips" id="matched"></div>
+        </div>
+        <div class="card">
+          <h2>Missing skills</h2>
+          <p class="sub">Asked for in the job, not found in the CV</p>
+          <div class="chips" id="missing"></div>
+        </div>
+        <div class="card">
+          <h2>Gendered words in the job ad</h2>
+          <p class="sub">Whole words only: "he", "his", "man", "she", "her", "woman"</p>
+          <div id="bias"></div>
+        </div>
+      </div>
+
+      <div class="card highlight">
+        <h2>Shared keywords</h2>
+        <p class="sub">Words both texts use, strongest first, highlighted below. Filler words such as "and" are hidden here but still count toward the keyword score.</p>
+        <div class="chips" id="terms" style="margin-bottom:16px"></div>
+        <div class="hl-grid">
+          <div><h3>CV</h3><div class="hl-text" id="hl-cv"></div></div>
+          <div><h3>Job description</h3><div class="hl-text" id="hl-jd"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <details class="how">
+      <summary>How it works and what it can't do</summary>
+      <ul>
+        <li>Both texts are lower-cased and stripped of punctuation, then embedded with <code>all-MiniLM-L6-v2</code> (first 256 tokens, mean pooled). Semantic similarity is the cosine of the two embeddings.</li>
+        <li>Keyword overlap is a TF-IDF cosine fitted on just these two texts, computed the way scikit-learn's <code>TfidfVectorizer</code> does by default.</li>
+        <li>Skills come from a fixed list of 16 (Python, Docker, SQL, PyTorch, ...). A skill counts as present when the text names it, or when one of its lines or sentences is within cosine 0.4 of the skill's embedding (so "trained CNNs in PyTorch" can count as deep learning). Skills outside the list are not seen at all.</li>
+        <li>The gendered-word check only looks for six pronouns and nouns. It does not detect coded language ("rockstar", "aggressive") and is a prompt for a human to look, not a verdict.</li>
+        <li>The scores rank how close two texts are. They say nothing about whether a person can do the job; do not use them to reject candidates automatically.</li>
+      </ul>
+    </details>
+  </main>
+
+  <footer>
+    Built by Nardy Michelle. Python service, tests and evaluation: <a href="https://github.com/Nardy11/ai-resume-matcher">github.com/Nardy11/ai-resume-matcher</a>.
+  </footer>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
