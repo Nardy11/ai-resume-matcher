@@ -1,8 +1,11 @@
-fastapi
-uvicorn
-sentence-transformers
-scikit-learn
-PyPDF2
-pytest
-python-multipart
-pytest-cov
+# Service
+fastapi==0.162.2
+uvicorn==0.54.0
+python-multipart==0.0.33
+sentence-transformers==6.2.0
+scikit-learn==1.9.1
+PyPDF2==3.0.1
+
+# Tests
+pytest==9.2.0
+pytest-cov==7.1.0
