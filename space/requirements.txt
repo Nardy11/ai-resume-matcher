@@ -1,0 +1,4 @@
+# Gradio itself comes from the Space (sdk_version in README.md).
+sentence-transformers==6.2.0
+scikit-learn==1.9.1
+PyPDF2==3.0.1
