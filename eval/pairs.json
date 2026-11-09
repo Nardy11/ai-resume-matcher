@@ -1,0 +1,126 @@
+[
+  {
+    "id": "ml-eng-match",
+    "label": "match",
+    "cv": "Machine learning engineer with 4 years of experience. Built and deployed PyTorch and TensorFlow models for demand forecasting and image classification. Strong Python, pandas and scikit-learn. Packaged models as FastAPI services in Docker and ran them on Kubernetes with CI/CD pipelines in GitHub Actions.",
+    "jd": "We are hiring a Machine Learning Engineer to train, ship and monitor models in production. You will work in Python with PyTorch or TensorFlow, build APIs for model serving, containerise services with Docker and deploy to Kubernetes. Experience with CI/CD is expected."
+  },
+  {
+    "id": "nlp-match",
+    "label": "match",
+    "cv": "NLP engineer. Fine-tuned transformer models for text classification and named entity recognition in Arabic and English. Built a semantic search engine with sentence embeddings and a vector database. Python, Hugging Face, PyTorch, SQL.",
+    "jd": "NLP Engineer wanted to build text classification, entity extraction and semantic search features. Required: Python, deep learning with PyTorch, experience with transformer models and embeddings. Nice to have: multilingual NLP."
+  },
+  {
+    "id": "data-analyst-match",
+    "label": "match",
+    "cv": "Data analyst with 3 years in retail. Daily work in SQL and Python (pandas) to clean sales data, build dashboards in Power BI and run A/B test analysis. Presented weekly KPI reports to management.",
+    "jd": "Data Analyst to own sales reporting. You will write SQL queries, analyse data with Python and pandas, build dashboards and present insights and KPIs to business stakeholders. A/B testing experience is a plus."
+  },
+  {
+    "id": "cv-match",
+    "label": "match",
+    "cv": "Computer vision engineer. Trained object detection and segmentation models (YOLO, Mask R-CNN) in PyTorch for warehouse cameras. Optimised inference with ONNX and TensorRT on edge devices. Python, OpenCV, Docker.",
+    "jd": "Computer Vision Engineer to develop detection and segmentation models for video analytics. Deep learning in PyTorch, OpenCV, model optimisation for edge deployment (ONNX, TensorRT) and Docker are required."
+  },
+  {
+    "id": "mlops-match",
+    "label": "match",
+    "cv": "MLOps engineer. Designed CI/CD pipelines for model training and deployment, managed Kubernetes clusters, set up model monitoring and experiment tracking with MLflow. Python, Docker, Terraform, AWS.",
+    "jd": "MLOps Engineer to build the platform our data scientists ship models on: CI/CD for ML, Kubernetes, Docker, model registry and monitoring, infrastructure as code. Python required; AWS experience preferred."
+  },
+  {
+    "id": "backend-match",
+    "label": "match",
+    "cv": "Backend developer with 5 years building REST APIs in Python (FastAPI, Django) and PostgreSQL. Wrote integration tests, containerised services with Docker and deployed them through CI/CD.",
+    "jd": "Python Backend Engineer to design and build REST APIs with FastAPI, model data in PostgreSQL / SQL, write tests and ship through a CI/CD pipeline. Docker experience required."
+  },
+  {
+    "id": "ds-match",
+    "label": "match",
+    "cv": "Data scientist. Built churn prediction and customer segmentation models with scikit-learn and XGBoost. Feature engineering in pandas, SQL for data extraction, model explanations with SHAP for business teams.",
+    "jd": "Data Scientist to build predictive models (churn, lifetime value) using Python, scikit-learn and gradient boosting. Strong SQL and pandas, and the ability to explain model results to non-technical stakeholders."
+  },
+  {
+    "id": "frontend-match",
+    "label": "match",
+    "cv": "Frontend developer. Four years with React, TypeScript and CSS. Built accessible design systems, wrote component tests with Jest and Playwright, and improved Core Web Vitals on a large e-commerce site.",
+    "jd": "Senior Frontend Engineer: React and TypeScript, strong CSS, experience building a component library / design system, testing with Jest or Playwright, and a focus on web performance and accessibility."
+  },
+  {
+    "id": "career-change-ds",
+    "label": "match",
+    "cv": "Statistics graduate moving into industry. Master's thesis predicted hospital readmissions with logistic regression and random forests, written in Python and R. Cleaned messy clinical records and explained the model to doctors. Comfortable writing SQL queries.",
+    "jd": "Data Scientist to build predictive models (churn, lifetime value) using Python, scikit-learn and gradient boosting. Strong SQL and pandas, and the ability to explain model results to non-technical stakeholders.",
+    "note": "harder case"
+  },
+  {
+    "id": "short-cv-backend",
+    "label": "match",
+    "cv": "Python developer. FastAPI, PostgreSQL, Docker, GitHub Actions. 3 years.",
+    "jd": "Python Backend Engineer to design and build REST APIs with FastAPI, model data in PostgreSQL / SQL, write tests and ship through a CI/CD pipeline. Docker experience required.",
+    "note": "harder case"
+  },
+  {
+    "id": "frontend-vs-ml",
+    "label": "no-match",
+    "cv": "Frontend developer. Four years with React, TypeScript and CSS. Built accessible design systems, wrote component tests with Jest and Playwright, and improved Core Web Vitals on a large e-commerce site.",
+    "jd": "We are hiring a Machine Learning Engineer to train, ship and monitor models in production. You will work in Python with PyTorch or TensorFlow, build APIs for model serving, containerise services with Docker and deploy to Kubernetes. Experience with CI/CD is expected."
+  },
+  {
+    "id": "nurse-vs-data",
+    "label": "no-match",
+    "cv": "Registered nurse with 6 years in intensive care. Patient assessment, medication administration, wound care and family education. BLS and ACLS certified.",
+    "jd": "Data Analyst to own sales reporting. You will write SQL queries, analyse data with Python and pandas, build dashboards and present insights and KPIs to business stakeholders. A/B testing experience is a plus."
+  },
+  {
+    "id": "chef-vs-nlp",
+    "label": "no-match",
+    "cv": "Head chef. Ran a 40-cover kitchen, designed seasonal menus, managed food cost and stock, trained junior cooks and kept HACCP food safety records.",
+    "jd": "NLP Engineer wanted to build text classification, entity extraction and semantic search features. Required: Python, deep learning with PyTorch, experience with transformer models and embeddings. Nice to have: multilingual NLP."
+  },
+  {
+    "id": "accountant-vs-mlops",
+    "label": "no-match",
+    "cv": "Chartered accountant. Month-end close, IFRS reporting, audits, VAT returns and cash-flow forecasting in Excel and SAP for a manufacturing group.",
+    "jd": "MLOps Engineer to build the platform our data scientists ship models on: CI/CD for ML, Kubernetes, Docker, model registry and monitoring, infrastructure as code. Python required; AWS experience preferred."
+  },
+  {
+    "id": "sales-vs-cv",
+    "label": "no-match",
+    "cv": "Sales manager. Grew B2B revenue 30% a year, managed a team of 8 account executives, negotiated enterprise contracts and kept the CRM pipeline up to date.",
+    "jd": "Computer Vision Engineer to develop detection and segmentation models for video analytics. Deep learning in PyTorch, OpenCV, model optimisation for edge deployment (ONNX, TensorRT) and Docker are required."
+  },
+  {
+    "id": "ml-vs-frontend",
+    "label": "no-match",
+    "cv": "Machine learning engineer with 4 years of experience. Built and deployed PyTorch and TensorFlow models for demand forecasting and image classification. Strong Python, pandas and scikit-learn. Packaged models as FastAPI services in Docker and ran them on Kubernetes with CI/CD pipelines in GitHub Actions.",
+    "jd": "Senior Frontend Engineer: React and TypeScript, strong CSS, experience building a component library / design system, testing with Jest or Playwright, and a focus on web performance and accessibility."
+  },
+  {
+    "id": "teacher-vs-backend",
+    "label": "no-match",
+    "cv": "Primary school teacher. Planned lessons for classes of 28, tracked pupil progress, ran parent meetings and led the reading programme.",
+    "jd": "Python Backend Engineer to design and build REST APIs with FastAPI, model data in PostgreSQL / SQL, write tests and ship through a CI/CD pipeline. Docker experience required."
+  },
+  {
+    "id": "android-vs-ds",
+    "label": "no-match",
+    "cv": "Android developer. Kotlin and Java apps with Jetpack Compose, offline sync with Room, push notifications and Play Store releases for a banking app.",
+    "jd": "Data Scientist to build predictive models (churn, lifetime value) using Python, scikit-learn and gradient boosting. Strong SQL and pandas, and the ability to explain model results to non-technical stakeholders."
+  },
+  {
+    "id": "frontend-vs-backend",
+    "label": "no-match",
+    "cv": "Frontend developer. Four years with React, TypeScript and CSS. Built accessible design systems, wrote component tests with Jest and Playwright, and improved Core Web Vitals on a large e-commerce site.",
+    "jd": "Python Backend Engineer to design and build REST APIs with FastAPI, model data in PostgreSQL / SQL, write tests and ship through a CI/CD pipeline. Docker experience required.",
+    "note": "harder case"
+  },
+  {
+    "id": "analyst-vs-mlops",
+    "label": "no-match",
+    "cv": "Data analyst with 3 years in retail. Daily work in SQL and Python (pandas) to clean sales data, build dashboards in Power BI and run A/B test analysis. Presented weekly KPI reports to management.",
+    "jd": "MLOps Engineer to build the platform our data scientists ship models on: CI/CD for ML, Kubernetes, Docker, model registry and monitoring, infrastructure as code. Python required; AWS experience preferred.",
+    "note": "harder case"
+  }
+]

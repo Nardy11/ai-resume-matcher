@@ -1,0 +1,171 @@
+{
+  "threshold": 0.5,
+  "pairs": [
+    {
+      "id": "ml-eng-match",
+      "label": "match",
+      "sbert_score": 0.7805,
+      "tfidf_score": 0.4161,
+      "advanced_score": 0.7735
+    },
+    {
+      "id": "nlp-match",
+      "label": "match",
+      "sbert_score": 0.7922,
+      "tfidf_score": 0.4029,
+      "advanced_score": 0.6567
+    },
+    {
+      "id": "data-analyst-match",
+      "label": "match",
+      "sbert_score": 0.7984,
+      "tfidf_score": 0.3664,
+      "advanced_score": 0.7725
+    },
+    {
+      "id": "cv-match",
+      "label": "match",
+      "sbert_score": 0.7519,
+      "tfidf_score": 0.4398,
+      "advanced_score": 0.7039
+    },
+    {
+      "id": "mlops-match",
+      "label": "match",
+      "sbert_score": 0.8116,
+      "tfidf_score": 0.2916,
+      "advanced_score": 0.7041
+    },
+    {
+      "id": "backend-match",
+      "label": "match",
+      "sbert_score": 0.8253,
+      "tfidf_score": 0.4334,
+      "advanced_score": 0.7243
+    },
+    {
+      "id": "ds-match",
+      "label": "match",
+      "sbert_score": 0.7067,
+      "tfidf_score": 0.2487,
+      "advanced_score": 0.6281
+    },
+    {
+      "id": "frontend-match",
+      "label": "match",
+      "sbert_score": 0.8725,
+      "tfidf_score": 0.4463,
+      "advanced_score": 0.5255
+    },
+    {
+      "id": "career-change-ds",
+      "label": "match",
+      "sbert_score": 0.4323,
+      "tfidf_score": 0.2565,
+      "advanced_score": 0.4174
+    },
+    {
+      "id": "short-cv-backend",
+      "label": "match",
+      "sbert_score": 0.741,
+      "tfidf_score": 0.1617,
+      "advanced_score": 0.5528
+    },
+    {
+      "id": "frontend-vs-ml",
+      "label": "no-match",
+      "sbert_score": 0.166,
+      "tfidf_score": 0.161,
+      "advanced_score": 0.1152
+    },
+    {
+      "id": "nurse-vs-data",
+      "label": "no-match",
+      "sbert_score": 0.1085,
+      "tfidf_score": 0.1254,
+      "advanced_score": 0.0793
+    },
+    {
+      "id": "chef-vs-nlp",
+      "label": "no-match",
+      "sbert_score": 0.0486,
+      "tfidf_score": 0.0688,
+      "advanced_score": 0.038
+    },
+    {
+      "id": "accountant-vs-mlops",
+      "label": "no-match",
+      "sbert_score": 0.0775,
+      "tfidf_score": 0.0667,
+      "advanced_score": 0.0521
+    },
+    {
+      "id": "sales-vs-cv",
+      "label": "no-match",
+      "sbert_score": 0.0326,
+      "tfidf_score": 0.0596,
+      "advanced_score": 0.0282
+    },
+    {
+      "id": "ml-vs-frontend",
+      "label": "no-match",
+      "sbert_score": 0.1257,
+      "tfidf_score": 0.2924,
+      "advanced_score": 0.1213
+    },
+    {
+      "id": "teacher-vs-backend",
+      "label": "no-match",
+      "sbert_score": -0.0485,
+      "tfidf_score": 0.0449,
+      "advanced_score": -0.0152
+    },
+    {
+      "id": "android-vs-ds",
+      "label": "no-match",
+      "sbert_score": 0.1384,
+      "tfidf_score": 0.1025,
+      "advanced_score": 0.0897
+    },
+    {
+      "id": "frontend-vs-backend",
+      "label": "no-match",
+      "sbert_score": 0.1753,
+      "tfidf_score": 0.1878,
+      "advanced_score": 0.1252
+    },
+    {
+      "id": "analyst-vs-mlops",
+      "label": "no-match",
+      "sbert_score": 0.2692,
+      "tfidf_score": 0.1274,
+      "advanced_score": 0.2201
+    }
+  ],
+  "summary": {
+    "sbert_score": {
+      "mean_match": 0.7512,
+      "mean_no_match": 0.1093,
+      "min_match": 0.4323,
+      "max_no_match": 0.2692,
+      "roc_auc": 1.0,
+      "accuracy_at_threshold": 0.95
+    },
+    "tfidf_score": {
+      "mean_match": 0.3463,
+      "mean_no_match": 0.1236,
+      "min_match": 0.1617,
+      "max_no_match": 0.2924,
+      "roc_auc": 0.95,
+      "accuracy_at_threshold": 0.5
+    },
+    "advanced_score": {
+      "mean_match": 0.6459,
+      "mean_no_match": 0.0854,
+      "min_match": 0.4174,
+      "max_no_match": 0.2201,
+      "roc_auc": 1.0,
+      "accuracy_at_threshold": 0.95
+    }
+  }
+}
